@@ -4,6 +4,10 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
+@app.route('/',methods=["GET"])
+def hello():
+    return "hello there"
+
 
 @app.route('/bot', methods=['POST'])
 def bot():
