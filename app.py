@@ -15,14 +15,14 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-    if 'cat' in incoming_msg:
-        msg.body("Meow Meow")
+    if 'hi' in incoming_msg:
+        msg.body("what is your name ?")
         responded = True
-    if 'dog' in incoming_msg:
-        msg.body("Woof Woof")
+    if 'rahul' in incoming_msg:
+        msg.body("neha bhabhi kidhar hain")
         responded = True
     if not responded:
-        msg.body('i hate humans')
+        msg.body('kya re rahul')
     return str(resp)
 
 
