@@ -22,6 +22,11 @@ def read_suffix():
         suffix = f.read()
     return suffix
 
+def clear_json():
+    with open('data.json',) as f:
+        empty = {}
+        json.dump(empty,f)
+
 def add_field(key, value):
     with open('data.json',)as f:
         data = json.load(f)
@@ -45,6 +50,7 @@ def bot():
         msg.body("Working")
 
     if incoming_msg == "/bed":
+        clear_json()
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.\nPlease provide me your name :
         ''')
