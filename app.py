@@ -45,8 +45,18 @@ def bot():
         write_log("Prompt Given")
 
     if '/name' in incoming_msg:
-        name = incoming_msg[6:]
+        name = incoming_msg[5:]
         add_field('name',name)
+        msg.body('''
+        Name Added\n\nSend me your contact number..
+        ''')
+    
+    if '/contact' in incoming_msg:
+        contact = incoming_msg[8:]
+        add_field('contact',contact)
+        msg.body('''
+        Contact Added\n\nSend me your aadhar number
+        ''')
 
 
     return str(resp)
