@@ -10,22 +10,27 @@ def hello():
 
 initiated = False
 
+def write_log(msg):
+    with open('logs.txt', 'a') as f:
+        f.write(f"\n{msg}")
 
 @app.route('/bot', methods=['POST'])
 def bot():
     incoming_msg = request.values.get('Body', '').lower()
+
     resp = MessagingResponse()
     msg = resp.message()
-    global initiated
+
     responded = False
     if incoming_msg == "test":
         msg.body("Working")
-    if '/need_a_bed' in incoming_msg:
+
+    if incoming_msg == "/bed":
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.
         Please provide me your basic details :
         ''')
-        initiated = True
+        write_log("Prompt Given")
     if initiated:
         name, contact, aadhar = incoming_msg.split().apply(lambda s:s.strip())
         msg.body(f'''
