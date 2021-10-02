@@ -61,9 +61,11 @@ def bot():
     if '/contact' in incoming_msg:
         contact = incoming_msg[9:]
         add_field('contact',contact)
-        msg.body('''
-        Contact Added\n Type "confirm" if these are your details
-        ''')
+        with open('data.json',)as f:
+            data = json.load(f)
+        msg.body(
+        f'Contact Added\n Type "confirm" if these are your details : \nName : {data["name"]}\nContact : {data["contact"]}'
+        )
         write_suffix("")
 
     if "confirm" in incoming_msg:
