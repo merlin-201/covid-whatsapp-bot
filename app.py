@@ -49,7 +49,7 @@ def bot():
     if incoming_msg == "test":
         msg.body("Working")
 
-    if incoming_msg == "/bed":
+    if "/bed" in incoming_msg:
         clear_json()
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.\nPlease provide me your name :
