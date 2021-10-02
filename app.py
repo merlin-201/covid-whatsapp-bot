@@ -34,7 +34,9 @@ def add_field(key, value):
 @app.route('/bot', methods=['POST'])
 def bot():
     incoming_msg = request.values.get('Body', '')
+
     incoming_msg = read_suffix() + incoming_msg
+
     resp = MessagingResponse()
     msg = resp.message()
 
@@ -50,7 +52,7 @@ def bot():
         write_suffix('/name')
 
     if '/name' in incoming_msg:
-        name = incoming_msg[5:]
+        name = incoming_msg[6:]
         add_field('name',name)
         msg.body('''
         Name Added\n\nSend me your contact number..
@@ -58,7 +60,7 @@ def bot():
         write_suffix('/contact')
     
     if '/contact' in incoming_msg:
-        contact = incoming_msg[8:]
+        contact = incoming_msg[9:]
         add_field('contact',contact)
         msg.body('''
         Contact Added\n\n
