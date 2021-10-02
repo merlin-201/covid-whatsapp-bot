@@ -51,11 +51,14 @@ def bot():
         msg.body("Working")
 
     if "bed" in incoming_msg:
-        clear_json()
-        msg.body('''
-        Hello, Welcome to the Covid bed allocation helpline.\nPlease provide me your name :
-        ''')
-        write_suffix('/name')
+        try:
+            clear_json()
+            msg.body('''
+            Hello, Welcome to the Covid bed allocation helpline.\nPlease provide me your name :
+            ''')
+            write_suffix('/name')
+        except Exception as e:
+            msg.body(str(e))
 
     if '/name' in incoming_msg:
         name = incoming_msg[6:]
