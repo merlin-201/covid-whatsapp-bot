@@ -18,4 +18,4 @@ def upload_json():
     bedrequests.insert_one(data)
 
 # clear_data()
-upload_json()
+# upload_json()
