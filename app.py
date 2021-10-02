@@ -1,6 +1,8 @@
 from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
+from flask import jsonify
+import json
 
 app = Flask(__name__)
 
@@ -13,6 +15,16 @@ initiated = False
 def write_log(msg):
     with open('logs.txt', 'a') as f:
         f.write(f"\n{msg}")
+
+def add_field(key, value):
+    with open('data.json',)as f:
+        data = json.load(f)
+    
+    data[key]=value
+
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
+
 
 @app.route('/bot', methods=['POST'])
 def bot():
@@ -31,22 +43,20 @@ def bot():
         Please provide me your basic details :
         ''')
         write_log("Prompt Given")
-    if initiated:
-        name, contact, aadhar = incoming_msg.split().apply(lambda s:s.strip())
-        msg.body(f'''
-        Your details are as follows :\n
-        Name : {name}\n
-        Contact : {contact}\n
-        Aadhar : {aadhar}
-        ''')
-        responded = True
+
+    if '/name' in incoming_msg:
+        name = incoming_msg[6:]
+        add_field('name',name)
+
+
     return str(resp)
 
-@app.route('/logs', methods=['GET'])
-def logs():
-    with open('logs.txt','r') as f:
-        logs = f.readlines()
-        return logs
+@app.route('/data', methods=['GET'])
+def get_data():
+    with open('data.json',)as f:
+        data = json.load(f)
+    
+    return jsonify(data)
 
 
 
