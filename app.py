@@ -12,9 +12,14 @@ def hello():
 
 initiated = False
 
-def write_log(msg):
-    with open('logs.txt', 'a') as f:
+def write_suffix(msg):
+    with open('suffix.txt', 'w') as f:
         f.write(f"\n{msg}")
+
+def read_suffix():
+    with open('suffix.txt', 'r') as f:
+        suffix = f.read()
+    return suffix
 
 def add_field(key, value):
     with open('data.json',)as f:
@@ -28,8 +33,8 @@ def add_field(key, value):
 
 @app.route('/bot', methods=['POST'])
 def bot():
-    incoming_msg = request.values.get('Body', '').lower()
-
+    incoming_msg = request.values.get('Body', '')
+    incoming_msg = read_suffix() + incoming_msg
     resp = MessagingResponse()
     msg = resp.message()
 
@@ -42,7 +47,7 @@ def bot():
         Hello, Welcome to the Covid bed allocation helpline.
         Please provide me your basic details :
         ''')
-        write_log("Prompt Given")
+        write_suffix('/name')
 
     if '/name' in incoming_msg:
         name = incoming_msg[5:]
@@ -50,14 +55,14 @@ def bot():
         msg.body('''
         Name Added\n\nSend me your contact number..
         ''')
+        write_suffix('/contact')
     
     if '/contact' in incoming_msg:
         contact = incoming_msg[8:]
         add_field('contact',contact)
         msg.body('''
-        Contact Added\n\nSend me your aadhar number
+        Contact Added\n\n
         ''')
-
 
     return str(resp)
 
