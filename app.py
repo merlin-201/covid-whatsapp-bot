@@ -8,25 +8,31 @@ app = Flask(__name__)
 def hello():
     return "hello there"
 
+initiated = False
+
 
 @app.route('/bot', methods=['POST'])
 def bot():
     incoming_msg = request.values.get('Body', '').lower()
     resp = MessagingResponse()
     msg = resp.message()
+    global initiated
     responded = False
     if '/need_a_bed' in incoming_msg:
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.
-        \n\nPlease provide me your basic deatils in the following format :\n
-        Full Name,contact number,12-digit aadhar card
+        Please provide me your basic details :
+        ''')
+        initiated = True
+    if initiated:
+        name, contact, aadhar = incoming_msg.split().apply(lambda s:s.strip())
+        msg.body(f'''
+        Your details are as follows :\n
+        Name : {name}\n
+        Contact : {contact}\n
+        Aadhar : {aadhar}
         ''')
         responded = True
-    if 'rahul' in incoming_msg:
-        msg.body("neha bhabhi kidhar hain")
-        responded = True
-    if not responded:
-        msg.body('kya re rahul')
     return str(resp)
 
 
