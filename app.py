@@ -42,6 +42,13 @@ def bot():
         responded = True
     return str(resp)
 
+@app.route('/logs', methods=['GET'])
+def logs():
+    with open('logs.txt','r') as f:
+        logs = f.readlines()
+        return logs
+
+
 
 if __name__ == '__main__':
     app.run()
