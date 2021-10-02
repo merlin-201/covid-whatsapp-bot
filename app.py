@@ -23,7 +23,7 @@ def read_suffix():
     return suffix
 
 def clear_json():
-    with open('data.json',) as f:
+    with open('data.json','w') as f:
         empty = {}
         json.dump(empty,f)
 
