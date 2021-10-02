@@ -37,6 +37,7 @@ def add_field(key, value):
         json.dump(data, f)
 
 
+
 @app.route('/bot', methods=['POST'])
 def bot():
     incoming_msg = request.values.get('Body', '')
@@ -49,7 +50,7 @@ def bot():
     if incoming_msg == "test":
         msg.body("Working")
 
-    if "need-a-bed" in incoming_msg:
+    if "bed" in incoming_msg:
         clear_json()
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.\nPlease provide me your name :
