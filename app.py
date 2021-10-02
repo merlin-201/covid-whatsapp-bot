@@ -66,10 +66,10 @@ def bot():
         ''')
         write_suffix("")
 
-    if incoming_msg == "confirm":
+    if "confirm" in incoming_msg:
         upload_json()
         msg.body('''
-        your details have been succesfully uploaded\n\nOur Call Team will reach out to you soon
+        Your details have been succesfully uploaded\n\nOur Call Team will reach out to you soon
         ''')
 
     return str(resp)
