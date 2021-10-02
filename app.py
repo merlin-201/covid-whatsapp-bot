@@ -64,7 +64,8 @@ def bot():
         msg.body('''
         Contact Added\n Type "confirm" if these are your details
         ''')
-        
+        write_suffix("")
+
     if incoming_msg == "confirm":
         upload_json()
         msg.body('''
