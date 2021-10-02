@@ -18,6 +18,8 @@ def bot():
     msg = resp.message()
     global initiated
     responded = False
+    if incoming_msg == "test":
+        msg.body("Working")
     if '/need_a_bed' in incoming_msg:
         msg.body('''
         Hello, Welcome to the Covid bed allocation helpline.
