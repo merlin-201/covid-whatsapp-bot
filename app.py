@@ -15,8 +15,12 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-    if 'hi' in incoming_msg:
-        msg.body("what is your name ?")
+    if '/need_a_bed' in incoming_msg:
+        msg.body('''
+        Hello, Welcome to the Covid bed allocation helpline.
+        \n\nPlease provide me your basic deatils in the following format :\n
+        Full Name,contact number,12-digit aadhar card
+        ''')
         responded = True
     if 'rahul' in incoming_msg:
         msg.body("neha bhabhi kidhar hain")
