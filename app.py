@@ -41,7 +41,6 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
 
-    responded = False
     if incoming_msg == "test":
         msg.body("Working")
 
@@ -65,6 +64,7 @@ def bot():
         msg.body('''
         Contact Added\n Type "confirm" if these are your details
         ''')
+        
     if incoming_msg == "confirm":
         upload_json()
         msg.body('''
